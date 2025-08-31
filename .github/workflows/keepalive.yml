@@ -1,0 +1,13 @@
+name: Keep Render Alive
+on:
+  schedule:
+    # Runs at 6:30, 6:45, 7:00, ..., 22:45 IST (UTC 01:00, 01:15, ... 17:15 UTC)
+    - cron: "0,15,30,45 1-17 * * *"
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Backend
+        run: curl -s https://lawspot-bn.onrender.com/ > /dev/null
